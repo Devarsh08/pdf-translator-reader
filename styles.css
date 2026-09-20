@@ -1,0 +1,142 @@
+:root{
+  --bg:#f7f7f5;
+  --panel:#ffffff;
+  --accent:#2f6f4f;
+  --accent-soft:#dfeee4;
+  --text:#1e1e1e;
+  --muted:#8a8a8a;
+  --border:#e4e2dd;
+  --radius:10px;
+  --shadow:0 4px 18px rgba(0,0,0,0.08);
+}
+[data-theme="dark"]{
+  --bg:#1c1c1e;
+  --panel:#262629;
+  --accent:#4caf7d;
+  --accent-soft:#2e3f34;
+  --text:#eaeaea;
+  --muted:#9a9a9a;
+  --border:#38383c;
+  --shadow:0 4px 18px rgba(0,0,0,0.4);
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  transition:background .2s,color .2s;
+}
+
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 18px;
+  background:var(--panel);
+  border-bottom:1px solid var(--border);
+  flex-wrap:wrap;
+  gap:10px;
+}
+.toolbar-left,.toolbar-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+
+.file-btn,.ghost-btn,.primary-btn,.icon-btn{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  padding:7px 14px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  font-size:14px;
+  transition:background .15s, transform .1s;
+}
+.file-btn:hover,.ghost-btn:hover,.icon-btn:hover{background:var(--accent-soft);}
+.file-btn:active,.ghost-btn:active,.icon-btn:active{transform:scale(0.97);}
+.primary-btn{background:var(--accent);color:#fff;border:none;}
+.primary-btn:hover{opacity:.9;}
+.icon-btn{padding:6px 12px;font-weight:700;}
+
+.lang-group{
+  display:flex;align-items:center;gap:6px;
+  padding:4px 10px;border-radius:var(--radius);
+  background:var(--bg);border:1px solid var(--border);
+}
+.lang-group label{font-size:12px;color:var(--muted);}
+.lang-group select{
+  border:none;background:transparent;color:var(--text);font-size:14px;
+}
+.arrow{color:var(--muted);}
+
+.nav-bar{
+  display:flex;align-items:center;gap:16px;
+  padding:8px 18px;background:var(--panel);
+  border-bottom:1px solid var(--border);
+}
+.status{margin-left:auto;color:var(--muted);font-size:13px;}
+
+#viewer{
+  flex:1;overflow:auto;display:flex;justify-content:center;
+  padding:24px;position:relative;
+}
+#pageWrapper{position:relative;box-shadow:var(--shadow);background:#fff;}
+#pdfCanvas{display:block;}
+.textLayer{
+  position:absolute;top:0;left:0;
+  line-height:1;
+  user-select:none;
+}
+.textLayer span{
+  position:absolute;
+  color:transparent;
+  cursor:pointer;
+  white-space:pre;
+}
+.textLayer span:hover{
+  background:rgba(76,175,125,0.28);
+  border-radius:2px;
+}
+
+#emptyState{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;color:var(--muted);
+}
+#emptyState .muted{font-size:13px;margin-top:6px;}
+
+.tooltip{
+  position:fixed;z-index:60;
+  background:var(--panel);
+  border:1px solid var(--accent);
+  border-radius:var(--radius);
+  padding:8px 12px;
+  box-shadow:var(--shadow);
+  max-width:280px;
+  pointer-events:none;
+}
+.tooltip.hidden{display:none;}
+.tooltip-original{font-size:12px;color:var(--muted);font-style:italic;}
+.tooltip-translated{font-size:15px;font-weight:600;margin-top:2px;}
+
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,0.4);
+  display:flex;align-items:center;justify-content:center;z-index:80;
+}
+.modal.hidden{display:none;}
+.modal-card{
+  background:var(--panel);border-radius:var(--radius);
+  padding:22px 26px;max-width:460px;width:90%;
+  box-shadow:var(--shadow);
+}
+.modal-card h3{margin-top:0;}
+.muted{color:var(--muted);font-size:13px;}
+.pack-row{display:flex;gap:8px;margin:14px 0;}
+.pack-row select{flex:1;padding:6px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);}
+#loadedPackList{padding-left:18px;font-size:14px;}
+
+.sentence-block{margin:10px 0;}
+.sentence-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;}
+.sentence-text{font-size:15px;margin-top:4px;line-height:1.5;}
+.sentence-text.highlight{color:var(--accent);font-weight:600;}

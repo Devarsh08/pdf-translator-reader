@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Translator Reader</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="toolbar">
+    <div class="toolbar-left">
+      <label class="file-btn">
+        Open PDF
+        <input type="file" id="fileInput" accept="application/pdf" hidden>
+      </label>
+
+      <div class="lang-group">
+        <label>From</label>
+        <select id="srcLang"></select>
+        <span class="arrow">&#8594;</span>
+        <label>To</label>
+        <select id="tgtLang"></select>
+      </div>
+
+      <button id="packBtn" class="ghost-btn">Language Packs</button>
+    </div>
+
+    <div class="toolbar-right">
+      <button id="zoomOut" class="icon-btn">&minus;</button>
+      <span id="zoomLevel">140%</span>
+      <button id="zoomIn" class="icon-btn">+</button>
+      <button id="themeBtn" class="ghost-btn">Theme</button>
+    </div>
+  </header>
+
+  <div class="nav-bar">
+    <button id="prevPage" class="ghost-btn">&larr; Prev</button>
+    <span id="pageLabel">No document loaded</span>
+    <button id="nextPage" class="ghost-btn">Next &rarr;</button>
+    <span id="statusText" class="status"></span>
+  </div>
+
+  <main id="viewer">
+    <div id="pageWrapper">
+      <canvas id="pdfCanvas"></canvas>
+      <div id="textLayer" class="textLayer"></div>
+    </div>
+    <div id="emptyState">
+      <p>Open a PDF to start reading.</p>
+      <p class="muted">Hover any word for its meaning. Click a line for a full sentence translation.</p>
+    </div>
+  </main>
+
+  <div id="tooltip" class="tooltip hidden">
+    <div class="tooltip-original" id="tooltipOriginal"></div>
+    <div class="tooltip-translated" id="tooltipTranslated"></div>
+  </div>
+
+  <div id="packModal" class="modal hidden">
+    <div class="modal-card">
+      <h3>Language Packs</h3>
+      <p class="muted">
+        Packs are JSON dictionaries stored in <code>/langpacks/</code>. Once loaded,
+        the service worker caches them so translation works fully offline &mdash;
+        no server or internet is used after the first load.
+      </p>
+      <div class="pack-row">
+        <select id="packSelect"></select>
+        <button id="loadPackBtn" class="primary-btn">Load Pack</button>
+      </div>
+      <div id="packStatus" class="muted"></div>
+      <h4>Loaded packs (offline ready)</h4>
+      <ul id="loadedPackList"></ul>
+      <button id="closePackModal" class="ghost-btn">Close</button>
+    </div>
+  </div>
+
+  <div id="sentenceModal" class="modal hidden">
+    <div class="modal-card">
+      <h3>Line Translation</h3>
+      <div class="sentence-block">
+        <div class="sentence-label">Original</div>
+        <div id="sentenceOriginal" class="sentence-text"></div>
+      </div>
+      <div class="sentence-block">
+        <div class="sentence-label">Word-for-word (offline dictionary)</div>
+        <div id="sentenceTranslated" class="sentence-text highlight"></div>
+      </div>
+      <button id="closeSentenceModal" class="ghost-btn">Close</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/legacy/build/pdf.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

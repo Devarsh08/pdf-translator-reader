@@ -1,0 +1,10 @@
+{
+  "name": "PDF Translator Reader",
+  "short_name": "PDF Translator",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f7f7f5",
+  "theme_color": "#2f6f4f",
+  "description": "Offline PDF reader with hover-to-translate using pre-downloaded language packs.",
+  "icons": []
+}
